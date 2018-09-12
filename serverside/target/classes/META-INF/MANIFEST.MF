@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: project-2
+Implementation-Version: 1.0-SNAPSHOT
+Built-By: jimmy
+Implementation-Vendor-Id: com.revature.project-2
+Build-Jdk: 1.8.0_171
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/project-2
+Created-By: Maven Integration for Eclipse
+
