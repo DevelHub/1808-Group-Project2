@@ -5,36 +5,35 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.model.Subscription;
+import com.revature.projections.BasicSubscriptionProjection;
 import com.revature.services.SubscriptionService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("subscription")
 public class SubscriptionController {
 
 	@Autowired
 	SubscriptionService ss;
-//	
-	@PostMapping("addSub")
-	public ResponseEntity<Subscription> saveCustomerSubscription(@RequestBody Subscription s) {
+	
+	@PostMapping("add")
+	public int save(@RequestBody Subscription s) {
 		System.out.println("Adding Subscription");
-		s.setCompanyId(1);
-		s.setCustomerId(1);
-		s.setTimeFrame(1);
-		ResponseEntity<Subscription> re = new ResponseEntity<Subscription>(s, HttpStatus.CREATED);
-		return re;
+		return ss.save(s);
 	}
-//	@PostMapping("sub")
-//	public ResponseEntity<Subscription> save(@RequestBody Subscription u) {
-//		u.setId(1);
-//		u.setcustomerId(1);
-//		u.setTimeFrame(1);
-//		ResponseEntity<Subscription> re = new ResponseEntity<Subscription>(ss., HttpStatus.CREATED);
-//		return re;
-//	}
+	
+	@GetMapping("get/{id}")
+	public List<BasicSubscriptionProjection> findByCompanyId(@PathVariable int id) {
+		System.out.println("Getting Subscriptions");
+		return ss.findByCompanyId(id);
+	}
 }

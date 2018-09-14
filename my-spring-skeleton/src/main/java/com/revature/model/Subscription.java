@@ -36,8 +36,13 @@ public class Subscription {
 		this.timeFrame = timeFrame;
 		this.companyId = companyId;
 	}
+	
+	
 	public int getId() {
 		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public int getCustomerId() {
 		return customerId;
@@ -45,26 +50,17 @@ public class Subscription {
 	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
 	}
-	public int getCompanyId() {
-		return companyId;
-	}
-	public void setCompanyId(int companyId) {
-		this.companyId = companyId;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public int getcustomerId() {
-		return customerId;
-	}
-	public void setcustomerId(int customerId) {
-		this.customerId = customerId;
-	}
 	public int getTimeFrame() {
 		return timeFrame;
 	}
 	public void setTimeFrame(int timeFrame) {
 		this.timeFrame = timeFrame;
+	}
+	public int getCompanyId() {
+		return companyId;
+	}
+	public void setCompanyId(int companyId) {
+		this.companyId = companyId;
 	}
 	@Override
 	public int hashCode() {
