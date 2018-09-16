@@ -1,5 +1,7 @@
 package com.revature.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +16,9 @@ public class ItemReviewsService {
 	
 	public int save(ItemReviews i) {
 		return irr.save(i).getId();
+	}
+	
+	public List<ItemReviews> findByItemId(int itemId) {
+		return irr.findByItemId(itemId);
 	}
 }

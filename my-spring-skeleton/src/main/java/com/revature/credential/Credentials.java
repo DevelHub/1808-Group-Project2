@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @Entity
@@ -19,9 +21,11 @@ public class Credentials {
 	@Column(name = "user_id")
 	private int id;
 	private String username;
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
 	@Column(name = "user_role")
 	private String role;
+	
 	public Credentials() {
 		super();
 		// TODO Auto-generated constructor stub

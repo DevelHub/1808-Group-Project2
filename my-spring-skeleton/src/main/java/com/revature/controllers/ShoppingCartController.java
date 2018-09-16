@@ -11,20 +11,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.model.ItemReviews;
-import com.revature.services.ItemReviewsService;
+import com.revature.model.ShoppingCart;
+import com.revature.services.ShoppingCartService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("sfdsitem")
-public class ItemReviewsController {
+@RequestMapping("cart")
+public class ShoppingCartController {
 
 	@Autowired
-	private ItemReviewsService irs;
+	private ShoppingCartService scs;
 	
+	@PostMapping("add")
+	public int save(@RequestBody ShoppingCart sc) {
+		return scs.save(sc);
+	}
 	
-	@GetMapping("get/{itemId}")
-	public List<ItemReviews> findByItemId(@PathVariable int itemId) {
-		return irs.findByItemId(itemId);
+	@GetMapping("get/{customerId}")
+	public List<ShoppingCart> findByCustomerId(@PathVariable int customerId) {
+		return scs.findByCustomerId(customerId);
 	}
 }

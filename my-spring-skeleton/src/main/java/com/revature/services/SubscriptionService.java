@@ -19,7 +19,7 @@ public class SubscriptionService {
 		return sr.save(s).getId();
 	}
 	
-	public List<BasicSubscriptionProjection> findByCompanyId(int id) {
+	public List<Subscription> findByCompanyId(int id) {
 		return sr.findByCompanyId(id);
 	}
 }

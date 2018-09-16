@@ -1,6 +1,8 @@
 package com.revature.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.model.Company;
 import com.revature.model.Subscription;
 import com.revature.projections.BasicSubscriptionProjection;
 import com.revature.services.SubscriptionService;
@@ -32,8 +35,11 @@ public class SubscriptionController {
 	}
 	
 	@GetMapping("get/{id}")
-	public List<BasicSubscriptionProjection> findByCompanyId(@PathVariable int id) {
+	public Map<String, Integer> findByCompanyId(@PathVariable int id) {
 		System.out.println("Getting Subscriptions");
-		return ss.findByCompanyId(id);
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		List<Subscription> subs = ss.findByCompanyId(id);
+		map.put(subs.get(0).getCompany().getCompanyName(), subs.size());
+		return map;
 	}
 }

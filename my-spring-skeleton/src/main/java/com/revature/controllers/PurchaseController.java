@@ -6,25 +6,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.model.ItemReviews;
-import com.revature.services.ItemReviewsService;
+import com.revature.model.Purchase;
+import com.revature.services.PurchaseService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("sfdsitem")
-public class ItemReviewsController {
+@RequestMapping("purchase")
+public class PurchaseController {
 
 	@Autowired
-	private ItemReviewsService irs;
+	private PurchaseService ps;
 	
-	
-	@GetMapping("get/{itemId}")
-	public List<ItemReviews> findByItemId(@PathVariable int itemId) {
-		return irs.findByItemId(itemId);
+	@GetMapping("{id}")
+	public List<Purchase> findByCustomerId(@PathVariable int id) {
+		System.out.println("Getting Purchases");
+		return ps.findByCustomerId(id);
 	}
 }

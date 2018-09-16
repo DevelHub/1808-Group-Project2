@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.revature.model.ItemReviews;
+import com.revature.model.Purchase;
 
 @Repository
-public interface ItemReviewsRepo extends JpaRepository<ItemReviews, Integer>{
+public interface PurchaseRepo extends JpaRepository<Purchase, Integer>{
 
-	List<ItemReviews> findByItemId(int itemId);
+	List<Purchase> findByCustomerId(int customerId);
 }

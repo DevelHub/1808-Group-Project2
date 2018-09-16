@@ -11,5 +11,5 @@ import com.revature.projections.BasicSubscriptionProjection;
 @Repository
 public interface SubscriptionRepo extends JpaRepository<Subscription, Integer> {
 	
-	List<BasicSubscriptionProjection> findByCompanyId(int id);
+	List<Subscription> findByCompanyId(int id);
 }
