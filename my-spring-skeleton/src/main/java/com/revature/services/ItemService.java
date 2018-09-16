@@ -16,8 +16,8 @@ public class ItemService {
 	@Autowired
 	private ItemRepo ir;
 	
-	public String save(Item i){
-		return ir.save(i).getStatus();
+	public int save(Item i){
+		return ir.save(i).getId();
 	}
 	
 	
@@ -37,4 +37,11 @@ public class ItemService {
 		return ir.saveAndFlush(item).getId();
 	}
 	
+	public int updatePrice(Item item){
+		return ir.saveAndFlush(item).getPrice();
+	}
+	
+	public String updateDescription(Item item){
+		return ir.saveAndFlush(item).getDescription();
+	}
 }

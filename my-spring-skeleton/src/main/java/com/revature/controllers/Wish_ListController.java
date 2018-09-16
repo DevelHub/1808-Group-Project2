@@ -20,7 +20,7 @@ public class Wish_ListController {
 	
 	@PostMapping("add")
 	public int save(@RequestBody Wish_List list) {
-		System.out.println("Adding Subscription");
+		System.out.println("Adding to wishlist.");
 		return ws.save(list);
 	}
 	
