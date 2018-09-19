@@ -47,10 +47,9 @@ public class ItemController {
         return is.findByItemId(itemId);
     }
     
-    @PatchMapping("updatestatus")
+    @PatchMapping("updateStatus")
     public ResponseEntity<Item> update(@RequestBody Item aItem){
-    	System.out.println("updating status");
-        Item isc = is.findByCompanyIdAndName(aItem.getCompany().getId(), aItem.getName());
+        Item isc = is.findByCompanyIdAndName(aItem.getCompanyId(), aItem.getName());
         isc.setStatus(aItem.getStatus());
         ResponseEntity<Item> response = new ResponseEntity<Item>(isc, HttpStatus.CREATED);
         return response;

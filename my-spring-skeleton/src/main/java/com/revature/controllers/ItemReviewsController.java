@@ -16,14 +16,18 @@ import com.revature.services.ItemReviewsService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("sfdsitem")
+@RequestMapping("item-review")
 public class ItemReviewsController {
 
 	@Autowired
 	private ItemReviewsService irs;
 	
+	@PostMapping
+	public int save(@RequestBody ItemReviews ir) {
+		return irs.save(ir);
+	}
 	
-	@GetMapping("get/{itemId}")
+	@GetMapping("{itemId}")
 	public List<ItemReviews> findByItemId(@PathVariable int itemId) {
 		return irs.findByItemId(itemId);
 	}

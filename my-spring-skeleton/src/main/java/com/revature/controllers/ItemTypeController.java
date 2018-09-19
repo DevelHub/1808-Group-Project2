@@ -12,7 +12,7 @@ import com.revature.services.ItemTypeService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("dfsitem")
+@RequestMapping("item-type")
 public class ItemTypeController {
 
 	@Autowired

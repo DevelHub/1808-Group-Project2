@@ -26,15 +26,15 @@ public class ItemReviews {
 	private int id;
 	@Column(name = "item_id")
 	private int itemId;
-//	@Column(name = "customer_id")
-//	private int customerId;
+	@Column(name = "customer_id")
+	private int customerId;
     @DateTimeFormat(pattern = "dd.MM HH:MM")
 	private Timestamp date;
 	private int rating;
 	private String review;
 	
 	@ManyToOne
-	@JoinColumn(name = "customer_id")
+	@JoinColumn(name = "customer_id", insertable = false, updatable= false)
 	private Customer reviewer;
 
 	public ItemReviews() {
@@ -42,10 +42,12 @@ public class ItemReviews {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ItemReviews(int id, int itemId, Timestamp date, int rating, String review, Customer reviewer) {
+	public ItemReviews(int id, int itemId, int customerId, Timestamp date, int rating, String review,
+			Customer reviewer) {
 		super();
 		this.id = id;
 		this.itemId = itemId;
+		this.customerId = customerId;
 		this.date = date;
 		this.rating = rating;
 		this.review = review;
@@ -66,6 +68,14 @@ public class ItemReviews {
 
 	public void setItemId(int itemId) {
 		this.itemId = itemId;
+	}
+
+	public int getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
 	}
 
 	public Timestamp getDate() {
@@ -104,6 +114,7 @@ public class ItemReviews {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + customerId;
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + id;
 		result = prime * result + itemId;
@@ -122,6 +133,8 @@ public class ItemReviews {
 		if (getClass() != obj.getClass())
 			return false;
 		ItemReviews other = (ItemReviews) obj;
+		if (customerId != other.customerId)
+			return false;
 		if (date == null) {
 			if (other.date != null)
 				return false;
@@ -148,7 +161,7 @@ public class ItemReviews {
 
 	@Override
 	public String toString() {
-		return "ItemReviews [id=" + id + ", itemId=" + itemId + ", date=" + date + ", rating=" + rating + ", review="
-				+ review + ", reviewer=" + reviewer + "]";
+		return "ItemReviews [id=" + id + ", itemId=" + itemId + ", customerId=" + customerId + ", date=" + date
+				+ ", rating=" + rating + ", review=" + review + ", reviewer=" + reviewer + "]";
 	}
 }
