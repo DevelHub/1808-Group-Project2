@@ -28,6 +28,7 @@ public class Item {
     @Column(name = "type_id")
     private int typeId;
     
+    private String gender;
     private String name;
     private String description;
     private int price;
@@ -46,12 +47,13 @@ public class Item {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Item(int id, int companyId, int typeId, String name, String description, int price, Timestamp postDate,
-			String status, Company company) {
+	public Item(int id, int companyId, int typeId, String gender, String name, String description, int price,
+			Timestamp postDate, String status, Company company) {
 		super();
 		this.id = id;
 		this.companyId = companyId;
 		this.typeId = typeId;
+		this.gender = gender;
 		this.name = name;
 		this.description = description;
 		this.price = price;
@@ -100,6 +102,20 @@ public class Item {
 	 */
 	public void setTypeId(int typeId) {
 		this.typeId = typeId;
+	}
+
+	/**
+	 * @return the gender
+	 */
+	public String getGender() {
+		return gender;
+	}
+
+	/**
+	 * @param gender the gender to set
+	 */
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	/**
@@ -196,6 +212,7 @@ public class Item {
 		result = prime * result + ((company == null) ? 0 : company.hashCode());
 		result = prime * result + companyId;
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((postDate == null) ? 0 : postDate.hashCode());
@@ -229,6 +246,11 @@ public class Item {
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
+		if (gender == null) {
+			if (other.gender != null)
+				return false;
+		} else if (!gender.equals(other.gender))
+			return false;
 		if (id != other.id)
 			return false;
 		if (name == null) {
@@ -258,8 +280,8 @@ public class Item {
 	 */
 	@Override
 	public String toString() {
-		return "Item [id=" + id + ", companyId=" + companyId + ", typeId=" + typeId + ", name=" + name
-				+ ", description=" + description + ", price=" + price + ", postDate=" + postDate + ", status=" + status
-				+ ", company=" + company + "]";
+		return "Item [id=" + id + ", companyId=" + companyId + ", typeId=" + typeId + ", gender=" + gender + ", name="
+				+ name + ", description=" + description + ", price=" + price + ", postDate=" + postDate + ", status="
+				+ status + ", company=" + company + "]";
 	}
 }
