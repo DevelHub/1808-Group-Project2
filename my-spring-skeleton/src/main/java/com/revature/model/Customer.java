@@ -39,6 +39,7 @@ public class Customer {
 	}
 	public Customer(int id, int userId, int addressId, float cardNumber, String gender, String ethnicity,
 			String dateOfBirth, int age, String firstname, String lastname, String username, String password) {
+		super();
 		this.id = id;
 		this.userId = userId;
 		this.addressId = addressId;

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.model.Customer;
+import com.revature.projections.BasicCustomerProjection;
 import com.revature.services.CustomerService;
 
 @CrossOrigin
@@ -30,18 +31,22 @@ public class CustomerController {
 	public int save(@RequestBody Customer c) {
 		return cs.save(c);
 	}
-	
-	@PostMapping("login")
-	public List<Customer> findByUsernameAndPassword(@RequestBody Customer c) {
-		return cs.findByUsernameAndPassword(c.getUsername(), c.getPassword());
-	}
-
-	// /users
-//	@GetMapping
-//	public List<BasicUserProjection> findAll() {
-//		System.out.println("finding all users");
-//		return us.findAll();
+//	
+//	@PostMapping("login")
+//	public List<Customer> findByUsernameAndPassword(@RequestBody Customer c) {
+//		return cs.findByUsernameAndPassword(c.getUsername(), c.getPassword());
 //	}
+
+//	@GetMapping("{id}")
+//	public Customer find
+//	
+//	@GetMapping
+	// /users
+	@GetMapping
+	public List<BasicCustomerProjection> findAllProjectedBy() {
+		System.out.println("finding all users");
+		return cs.findAllProjectedBy();
+	}
 
 	// /users/:id
 //	@Transactional

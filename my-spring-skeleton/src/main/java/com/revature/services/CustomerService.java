@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.revature.model.Customer;
+import com.revature.projections.BasicCustomerProjection;
 import com.revature.repos.CustomerRepo;
 
 @Service
@@ -19,25 +20,24 @@ public class CustomerService {
 	
 	public int save(Customer c) {
 		Customer customer = new Customer();
+		customer.setUserId(c.getId());
 		customer.setFirstname(c.getFirstname());
 		customer.setLastname(c.getLastname());
-		customer.setUsername(c.getUsername());
-		customer.setPassword(c.getPassword());
 		customer.setAddressId(1);
 		return cr.save(customer).getId();
 	}
-	
-	public List<Customer> findByUsernameAndPassword(String username, String password) {
-		return cr.findByUsernameAndPassword(username, password);
-	}
+//	
+//	public List<Customer> findByUsernameAndPassword(String username, String password) {
+//		return cr.findByUsernameAndPassword(username, password);
+//	}
 	
 	public int saveAndFlush(Customer c) {
 		return cr.saveAndFlush(c).getId();
 	}
 
-//	public List<BasicUserProjection> findAll() {
-//		return ur.findById(id);
-//	}
+	public List<BasicCustomerProjection> findAllProjectedBy() {
+		return cr.findAllProjectedBy();
+	}
 
 //	@Transactional(propagation = Propagation.MANDATORY)
 //	public AppUser findOne(int id) {
