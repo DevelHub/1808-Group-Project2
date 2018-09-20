@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -34,12 +36,18 @@ public class Item {
     @Column(name = "post_date")
     private Timestamp postDate;
     private String status;
+    
+    @ManyToOne
+    @JoinColumn(name = "company_id", insertable = false, updatable= false)
+    private Company company;
+
 	public Item() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	public Item(int id, int companyId, int typeId, String name, String description, int price, Timestamp postDate,
-			String status) {
+			String status, Company company) {
 		super();
 		this.id = id;
 		this.companyId = companyId;
@@ -49,103 +57,135 @@ public class Item {
 		this.price = price;
 		this.postDate = postDate;
 		this.status = status;
+		this.company = company;
 	}
+
 	/**
 	 * @return the id
 	 */
 	public int getId() {
 		return id;
 	}
+
 	/**
 	 * @param id the id to set
 	 */
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	/**
 	 * @return the companyId
 	 */
 	public int getCompanyId() {
 		return companyId;
 	}
+
 	/**
 	 * @param companyId the companyId to set
 	 */
 	public void setCompanyId(int companyId) {
 		this.companyId = companyId;
 	}
+
 	/**
 	 * @return the typeId
 	 */
 	public int getTypeId() {
 		return typeId;
 	}
+
 	/**
 	 * @param typeId the typeId to set
 	 */
 	public void setTypeId(int typeId) {
 		this.typeId = typeId;
 	}
+
 	/**
 	 * @return the name
 	 */
 	public String getName() {
 		return name;
 	}
+
 	/**
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	/**
 	 * @return the description
 	 */
 	public String getDescription() {
 		return description;
 	}
+
 	/**
 	 * @param description the description to set
 	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	/**
 	 * @return the price
 	 */
 	public int getPrice() {
 		return price;
 	}
+
 	/**
 	 * @param price the price to set
 	 */
 	public void setPrice(int price) {
 		this.price = price;
 	}
+
 	/**
 	 * @return the postDate
 	 */
 	public Timestamp getPostDate() {
 		return postDate;
 	}
+
 	/**
 	 * @param postDate the postDate to set
 	 */
 	public void setPostDate(Timestamp postDate) {
 		this.postDate = postDate;
 	}
+
 	/**
 	 * @return the status
 	 */
 	public String getStatus() {
 		return status;
 	}
+
 	/**
 	 * @param status the status to set
 	 */
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	/**
+	 * @return the company
+	 */
+	public Company getCompany() {
+		return company;
+	}
+
+	/**
+	 * @param company the company to set
+	 */
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -153,6 +193,7 @@ public class Item {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((company == null) ? 0 : company.hashCode());
 		result = prime * result + companyId;
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + id;
@@ -163,6 +204,7 @@ public class Item {
 		result = prime * result + typeId;
 		return result;
 	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
@@ -175,6 +217,11 @@ public class Item {
 		if (getClass() != obj.getClass())
 			return false;
 		Item other = (Item) obj;
+		if (company == null) {
+			if (other.company != null)
+				return false;
+		} else if (!company.equals(other.company))
+			return false;
 		if (companyId != other.companyId)
 			return false;
 		if (description == null) {
@@ -205,6 +252,7 @@ public class Item {
 			return false;
 		return true;
 	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -212,6 +260,6 @@ public class Item {
 	public String toString() {
 		return "Item [id=" + id + ", companyId=" + companyId + ", typeId=" + typeId + ", name=" + name
 				+ ", description=" + description + ", price=" + price + ", postDate=" + postDate + ", status=" + status
-				+ "]";
+				+ ", company=" + company + "]";
 	}
 }

@@ -11,4 +11,6 @@ import com.revature.model.ItemType;
 public interface ItemTypeRepo extends JpaRepository<ItemType, Integer>{
 
 	ItemType findByType(String type);
+	
+	List<ItemType> findAll();
 }

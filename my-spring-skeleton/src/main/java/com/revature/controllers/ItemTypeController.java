@@ -1,5 +1,7 @@
 package com.revature.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,5 +23,10 @@ public class ItemTypeController {
 	@GetMapping("{type}")
 	public ItemType findByType(@PathVariable String type) {
 		return its.findByType(type);
+	}
+	
+	@GetMapping
+	public List<ItemType> findAll() {
+		return its.findAll();
 	}
 }

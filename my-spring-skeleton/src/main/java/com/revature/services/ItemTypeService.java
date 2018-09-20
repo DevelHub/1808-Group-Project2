@@ -17,4 +17,8 @@ public class ItemTypeService {
 	public ItemType findByType(String type) {
 		return itr.findByType(type);
 	}
+	
+	public List<ItemType> findAll() {
+		return itr.findAll();
+	}
 }

@@ -28,16 +28,17 @@ public class Customer {
 	private String ethnicity;
 	@Column(name = "date_of_birth")
 	private String dateOfBirth;
-	private String age;
+	private int age;
 	private String firstname;
 	private String lastname;
+	private String username;
+	private String password;
 	public Customer() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Customer(int id, int userId, int addressId, float cardNumber, String gender, String ethnicity,
-			String dateOfBirth, String age, String firstname, String lastname) {
-		super();
+			String dateOfBirth, int age, String firstname, String lastname, String username, String password) {
 		this.id = id;
 		this.userId = userId;
 		this.addressId = addressId;
@@ -48,73 +49,162 @@ public class Customer {
 		this.age = age;
 		this.firstname = firstname;
 		this.lastname = lastname;
+		this.username = username;
+		this.password = password;
 	}
+	/**
+	 * @return the id
+	 */
 	public int getId() {
 		return id;
 	}
+	/**
+	 * @param id the id to set
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
+	/**
+	 * @return the userId
+	 */
 	public int getUserId() {
 		return userId;
 	}
+	/**
+	 * @param userId the userId to set
+	 */
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+	/**
+	 * @return the addressId
+	 */
 	public int getAddressId() {
 		return addressId;
 	}
+	/**
+	 * @param addressId the addressId to set
+	 */
 	public void setAddressId(int addressId) {
 		this.addressId = addressId;
 	}
+	/**
+	 * @return the cardNumber
+	 */
 	public float getCardNumber() {
 		return cardNumber;
 	}
+	/**
+	 * @param cardNumber the cardNumber to set
+	 */
 	public void setCardNumber(float cardNumber) {
 		this.cardNumber = cardNumber;
 	}
+	/**
+	 * @return the gender
+	 */
 	public String getGender() {
 		return gender;
 	}
+	/**
+	 * @param gender the gender to set
+	 */
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
+	/**
+	 * @return the ethnicity
+	 */
 	public String getEthnicity() {
 		return ethnicity;
 	}
+	/**
+	 * @param ethnicity the ethnicity to set
+	 */
 	public void setEthnicity(String ethnicity) {
 		this.ethnicity = ethnicity;
 	}
+	/**
+	 * @return the dateOfBirth
+	 */
 	public String getDateOfBirth() {
 		return dateOfBirth;
 	}
+	/**
+	 * @param dateOfBirth the dateOfBirth to set
+	 */
 	public void setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
-	public String getAge() {
+	/**
+	 * @return the age
+	 */
+	public int getAge() {
 		return age;
 	}
-	public void setAge(String age) {
+	/**
+	 * @param age the age to set
+	 */
+	public void setAge(int age) {
 		this.age = age;
 	}
+	/**
+	 * @return the firstname
+	 */
 	public String getFirstname() {
 		return firstname;
 	}
+	/**
+	 * @param firstname the firstname to set
+	 */
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
 	}
+	/**
+	 * @return the lastname
+	 */
 	public String getLastname() {
 		return lastname;
 	}
+	/**
+	 * @param lastname the lastname to set
+	 */
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
+	/**
+	 * @return the username
+	 */
+	public String getUsername() {
+		return username;
+	}
+	/**
+	 * @param username the username to set
+	 */
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + addressId;
-		result = prime * result + ((age == null) ? 0 : age.hashCode());
+		result = prime * result + age;
 		result = prime * result + Float.floatToIntBits(cardNumber);
 		result = prime * result + ((dateOfBirth == null) ? 0 : dateOfBirth.hashCode());
 		result = prime * result + ((ethnicity == null) ? 0 : ethnicity.hashCode());
@@ -122,9 +212,14 @@ public class Customer {
 		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((lastname == null) ? 0 : lastname.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + userId;
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -136,10 +231,7 @@ public class Customer {
 		Customer other = (Customer) obj;
 		if (addressId != other.addressId)
 			return false;
-		if (age == null) {
-			if (other.age != null)
-				return false;
-		} else if (!age.equals(other.age))
+		if (age != other.age)
 			return false;
 		if (Float.floatToIntBits(cardNumber) != Float.floatToIntBits(other.cardNumber))
 			return false;
@@ -170,14 +262,28 @@ public class Customer {
 				return false;
 		} else if (!lastname.equals(other.lastname))
 			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
 		if (userId != other.userId)
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
 			return false;
 		return true;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Customer [id=" + id + ", userId=" + userId + ", addressId=" + addressId + ", cardNumber=" + cardNumber
 				+ ", gender=" + gender + ", ethnicity=" + ethnicity + ", dateOfBirth=" + dateOfBirth + ", age=" + age
-				+ ", firstname=" + firstname + ", lastname=" + lastname + "]";
+				+ ", firstname=" + firstname + ", lastname=" + lastname + ", username=" + username + ", password="
+				+ password + "]";
 	}
 }
