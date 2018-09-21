@@ -13,7 +13,6 @@ import com.revature.credential.Credentials;
 import com.revature.model.Customer;
 //import com.revature.services.
 import com.revature.services.CredentialService;
-import com.revature.services.CustomerService;
 
 @CrossOrigin
 @RestController
@@ -22,9 +21,6 @@ public class CredentialController{
 
 	@Autowired
 	CredentialService cs;
-	
-	@Autowired
-	CustomerService cse;
 
 	@PostMapping
 	public int save(@RequestBody Credentials c) {
