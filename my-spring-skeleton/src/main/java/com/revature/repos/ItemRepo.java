@@ -9,13 +9,12 @@ import com.revature.model.Item;
 
 @Repository
 public interface ItemRepo extends JpaRepository<Item, Integer>{
-    
-    List<Item>findAll();
-    
-    Item findByCompanyIdAndName(int companyId, String name);
-    
-    List<Item>findById(int id);
-    
-	List<Item> findByCompanyId(int id);
-    
+	
+	List<Item>findAll();
+	
+	Item findByCompanyIdAndName(int companyId, String name);
+	Item findByIdAndName(int id, String name);
+	
+	List<Item>findById(int id);
+	
 }
