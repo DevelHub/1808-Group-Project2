@@ -35,5 +35,9 @@ public class ItemService {
     public int updateStatus(Item item){
         return ir.saveAndFlush(item).getId();
     }
+	
+	public List<Item> findByCompanyId(int id) {
+		return ir.findByCompanyId(id);
+	}
     
 }

@@ -24,8 +24,8 @@ public class Purchase {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "purchase_id")
 	private int id;
-//	@Column(name = "item_id")
-//	private int itemId;
+	@Column(name = "item_id")
+	private int itemId;
 	@Column(name = "customer_id")
 	private int customerId;
 	@Column(name = "purchase_date")
@@ -36,7 +36,7 @@ public class Purchase {
 	private Timestamp deliveryDate;
 	
 	@ManyToOne
-    @JoinColumn(name = "item_id")
+    @JoinColumn(name = "item_id", insertable = false, updatable = false)
 	private Item item;
 
 	public Purchase() {
@@ -44,55 +44,103 @@ public class Purchase {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Purchase(int id, int customerId, Timestamp purchaseDate, Timestamp deliveryDate, Item item) {
+	public Purchase(int id, int itemId, int customerId, Timestamp purchaseDate, Timestamp deliveryDate, Item item) {
 		super();
 		this.id = id;
+		this.itemId = itemId;
 		this.customerId = customerId;
 		this.purchaseDate = purchaseDate;
 		this.deliveryDate = deliveryDate;
 		this.item = item;
 	}
 
+	/**
+	 * @return the id
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * @param id the id to set
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
+	/**
+	 * @return the itemId
+	 */
+	public int getItemId() {
+		return itemId;
+	}
+
+	/**
+	 * @param itemId the itemId to set
+	 */
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
+	}
+
+	/**
+	 * @return the customerId
+	 */
 	public int getCustomerId() {
 		return customerId;
 	}
 
+	/**
+	 * @param customerId the customerId to set
+	 */
 	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
 	}
 
+	/**
+	 * @return the purchaseDate
+	 */
 	public Timestamp getPurchaseDate() {
 		return purchaseDate;
 	}
 
+	/**
+	 * @param purchaseDate the purchaseDate to set
+	 */
 	public void setPurchaseDate(Timestamp purchaseDate) {
 		this.purchaseDate = purchaseDate;
 	}
 
+	/**
+	 * @return the deliveryDate
+	 */
 	public Timestamp getDeliveryDate() {
 		return deliveryDate;
 	}
 
+	/**
+	 * @param deliveryDate the deliveryDate to set
+	 */
 	public void setDeliveryDate(Timestamp deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
 
-	public Item getitem() {
+	/**
+	 * @return the item
+	 */
+	public Item getItem() {
 		return item;
 	}
 
-	public void setitem(Item item) {
+	/**
+	 * @param item the item to set
+	 */
+	public void setItem(Item item) {
 		this.item = item;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -101,10 +149,14 @@ public class Purchase {
 		result = prime * result + ((deliveryDate == null) ? 0 : deliveryDate.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((item == null) ? 0 : item.hashCode());
+		result = prime * result + itemId;
 		result = prime * result + ((purchaseDate == null) ? 0 : purchaseDate.hashCode());
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -128,6 +180,8 @@ public class Purchase {
 				return false;
 		} else if (!item.equals(other.item))
 			return false;
+		if (itemId != other.itemId)
+			return false;
 		if (purchaseDate == null) {
 			if (other.purchaseDate != null)
 				return false;
@@ -136,9 +190,12 @@ public class Purchase {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return "Purchase [id=" + id + ", customerId=" + customerId + ", purchaseDate=" + purchaseDate
-				+ ", deliveryDate=" + deliveryDate + ", item=" + item + "]";
+		return "Purchase [id=" + id + ", itemId=" + itemId + ", customerId=" + customerId + ", purchaseDate="
+				+ purchaseDate + ", deliveryDate=" + deliveryDate + ", item=" + item + "]";
 	}
 }

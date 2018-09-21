@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.model.Subscription;
-import com.revature.projections.BasicSubscriptionProjection;
 import com.revature.repos.SubscriptionRepo;
 
 @Service

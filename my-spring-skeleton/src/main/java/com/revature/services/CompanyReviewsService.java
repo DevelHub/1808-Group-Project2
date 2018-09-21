@@ -21,12 +21,4 @@ public class CompanyReviewsService {
 	public List<CompanyReviews> findAll() {
 		return crs.findAll();
 	}
-	
-//	public List<CompanyReviews> findByCompanyId(int companyId) {
-//		return crs.findByCompanyId(companyId);
-//	}
-//	
-//	public int update(CompanyReviews cr) {
-//		return crs.saveAndFlush(cr).getId();
-//	}
 }

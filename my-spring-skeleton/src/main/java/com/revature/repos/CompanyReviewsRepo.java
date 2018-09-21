@@ -12,5 +12,4 @@ public interface CompanyReviewsRepo extends JpaRepository<CompanyReviews, Intege
 
 	List<CompanyReviews> findAll();
 	
-//	List<CompanyReviews> findByCompanyId(int companyId);
 }

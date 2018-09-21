@@ -14,6 +14,15 @@ public class PurchaseService {
 	@Autowired
 	private PurchaseRepo pr;
 	
+	public int save(Purchase p) {
+		Purchase purchase = new Purchase();
+		purchase.setCustomerId(p.getCustomerId());
+		purchase.setDeliveryDate(p.getDeliveryDate());
+		purchase.setPurchaseDate(p.getPurchaseDate());
+		purchase.setItemId(p.getItemId());
+		return pr.save(purchase).getId();
+	}
+	
 	public List<Purchase> findByCustomerId(int customerId) {
 		return pr.findByCustomerId(customerId);
 	}

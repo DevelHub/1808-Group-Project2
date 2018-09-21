@@ -11,11 +11,6 @@ import com.revature.projections.BasicCustomerProjection;
 @Repository
 public interface CustomerRepo extends JpaRepository<Customer, Integer> {
 	
-//	List<Customer> findByUsernameAndPassword(String username, String password);
-
-//	List<Customer> findByUsernameAndPassword(String username, String password);
-//	BasicCustomerProjection findPasswordByUsername(String username);
-
 	List<BasicCustomerProjection> findAllProjectedBy();
 
 }

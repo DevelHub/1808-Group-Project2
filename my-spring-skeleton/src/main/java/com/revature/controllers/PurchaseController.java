@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,9 +22,15 @@ public class PurchaseController {
 	@Autowired
 	private PurchaseService ps;
 	
+	@PostMapping
+	public int save(@RequestBody Purchase p) {
+		return ps.save(p);
+	}
+	
 	@GetMapping("{id}")
 	public List<Purchase> findByCustomerId(@PathVariable int id) {
 		System.out.println("Getting Purchases");
 		return ps.findByCustomerId(id);
 	}
+	
 }
