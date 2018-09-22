@@ -14,6 +14,22 @@ public class ShoppingCartService {
 	@Autowired
 	private ShoppingCartRepo scr;
 	
+	public int deleteOne(int cartId) {
+		scr.deleteById(cartId);
+		return 1;
+	}
+	
+	public int deleteAll(int customerId) {
+		List<ShoppingCart> shoppingCart = scr.findByCustomerId(customerId);
+		if(shoppingCart.isEmpty()) {
+			return 0;
+		}
+		else {
+			scr.deleteAll(shoppingCart);
+			return shoppingCart.size();
+		}
+	}
+	
 	public int save(ShoppingCart sc) {
 		return scr.save(sc).getId();
 	}
