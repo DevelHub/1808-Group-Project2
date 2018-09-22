@@ -16,5 +16,7 @@ public interface ItemRepo extends JpaRepository<Item, Integer>{
 	Item findByIdAndName(int id, String name);
 	
 	List<Item>findById(int id);
-	
+    
+	List<Item> findByCompanyId(int id);
+    
 }

@@ -1,6 +1,6 @@
 package com.revature.controllers;
 
-import java.util.List;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,7 +48,7 @@ public class ItemController {
 	
 	//update the status of an item by obtaining the company id and name of the item
 	//isc : item status change
-	@PatchMapping("update-status")
+	@PatchMapping("updatestatus")
 	public ResponseEntity<Item> update(@RequestBody Item aItem){
 		Item isc = is.findByIdAndName(aItem.getId(), aItem.getName());
 		isc.setStatus(aItem.getStatus());
@@ -59,7 +59,7 @@ public class ItemController {
 	
 	//update the price of an item by obtaining the company id and name of the item .
 	//ipc : item price change
-	@PatchMapping("update-price")
+	@PatchMapping("updateprice")
 	public ResponseEntity<Item> updatePrice(@RequestBody Item item){
 		Item ipc = is.findByIdAndName(item.getId(), item.getName());
 		ipc.setPrice(item.getPrice());
@@ -68,7 +68,7 @@ public class ItemController {
 		return response;
 	}
 	
-	@PatchMapping("update-description")
+	@PatchMapping("updatedescription")
 	public ResponseEntity<Item> updateDescription(@RequestBody Item item){
 		Item idc = is.findByIdAndName(item.getId(), item.getName());
 		idc.setDescription(item.getDescription());
@@ -76,5 +76,25 @@ public class ItemController {
 		ResponseEntity<Item> response = new ResponseEntity<Item>(idc, HttpStatus.CREATED);
 		return response;
 	}
-	
+    
+	@GetMapping("total")
+	public List<Map<String, Object>> findTotalItemsOfCompany() {
+		System.out.println("Getting Number of Items by Company");
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		try {
+			int index = 1;
+			while(true) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				List<Item> items = is.findByCompanyId(index++);
+				String companyName = items.get(0).getCompany().getCompanyName();
+				map.put("name", companyName);
+				map.put("total", items.size());
+				list.add(map);
+			}
+		} catch(IndexOutOfBoundsException ex) {
+			System.out.println("Exception Caught");
+		}
+		return list;
+	}
+    
 }

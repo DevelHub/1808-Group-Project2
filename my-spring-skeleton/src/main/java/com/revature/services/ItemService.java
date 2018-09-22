@@ -46,4 +46,8 @@ public class ItemService {
 	public String updateDescription(Item item){
 		return ir.saveAndFlush(item).getDescription();
 	}
+	
+	public List<Item> findByCompanyId(int id) {
+		return ir.findByCompanyId(id);
+	}
 }
