@@ -10,7 +10,8 @@ import com.revature.projections.BasicCustomerProjection;
 
 @Repository
 public interface CustomerRepo extends JpaRepository<Customer, Integer> {
+
+	List<Customer> findAll();
 	
 	List<BasicCustomerProjection> findAllProjectedBy();
-
 }

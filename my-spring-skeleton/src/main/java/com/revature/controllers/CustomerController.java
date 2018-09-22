@@ -23,12 +23,17 @@ public class CustomerController {
 	@Autowired
 	private CustomerService cs;
 	
+	@GetMapping
+	public List<Customer> findAll() {
+		return cs.findAll();
+	}
+	
 	@PostMapping
 	public int save(@RequestBody Customer c) {
 		return cs.save(c);
 	}
 
-	@GetMapping
+	@GetMapping("age")
 	public List<BasicCustomerProjection> findAllProjectedBy() {
 		System.out.println("finding all users");
 		return cs.findAllProjectedBy();

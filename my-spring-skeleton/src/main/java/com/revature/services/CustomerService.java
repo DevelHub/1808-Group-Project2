@@ -23,6 +23,10 @@ public class CustomerService {
 	@Autowired
 	private CustomerAddressService cas;
 	
+	public List<Customer> findAll() {
+		return cr.findAll();
+	}
+	
 	public int save(Customer c) {
 		Customer customer = new Customer();
 		customer.setUserId(c.getId());
