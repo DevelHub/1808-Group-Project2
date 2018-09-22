@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.revature.model.Address;
 import com.revature.model.Customer;
+import com.revature.model.CustomerAddress;
 import com.revature.projections.BasicCustomerProjection;
 import com.revature.repos.CustomerRepo;
 
@@ -19,6 +20,9 @@ public class CustomerService {
 	@Autowired
 	private AddressService ac;
 	
+	@Autowired
+	private CustomerAddressService cas;
+	
 	public int save(Customer c) {
 		Customer customer = new Customer();
 		customer.setUserId(c.getId());
@@ -29,13 +33,19 @@ public class CustomerService {
 		customer.setGender(c.getGender());
 		customer.setDateOfBirth(c.getDateOfBirth());
 		customer.setEthnicity(c.getEthnicity());
+		int customerId = cr.save(customer).getId();
 		Address address;
+		CustomerAddress customerAddress = new CustomerAddress();
 		for (int i = 0; i < 2; i++) {
 			address = c.getAddress().get(i);
 			address.setUserId(c.getId());
-			ac.save(address);
+			int addressId = ac.save(address);
+			customerAddress.setCustomerId(customerId);
+			customerAddress.setAddressId(addressId);
+			System.out.println("CUSTOMER ID: " + customerId + "ADDRESS ID: " + addressId);
+			cas.save(customerId, addressId);
 		}
-		return cr.save(customer).getId();
+		return customerId;
 	}
 	
 	public int saveAndFlush(Customer c) {

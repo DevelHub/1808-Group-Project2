@@ -4,10 +4,13 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -42,7 +45,13 @@ public class Customer {
 	@JoinColumn(name = "user_id", insertable = false, updatable = false)
 	private Credentials credentials;
 	
-	@OneToMany(mappedBy = "userId")
+//	@OneToMany
+//	@JoinColumn(name = "user_id")
+//	private List<Address> address;
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "customer_address", joinColumns = @JoinColumn(name = "customer_id"),
+		inverseJoinColumns = @JoinColumn(name = "address_id"))
 	private List<Address> address;
 
 	public Customer() {

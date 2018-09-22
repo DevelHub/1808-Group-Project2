@@ -5,9 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.revature.credential.Credentials;
 
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @Entity
@@ -25,10 +29,12 @@ public class Address {
 	private String country;
 	@Column(name = "user_id")
 	private int userId;
+
 	public Address() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	public Address(int id, String type, String city, String state, String zip, String country, int userId) {
 		super();
 		this.id = id;
@@ -39,90 +45,105 @@ public class Address {
 		this.country = country;
 		this.userId = userId;
 	}
+
 	/**
 	 * @return the id
 	 */
 	public int getId() {
 		return id;
 	}
+
 	/**
 	 * @param id the id to set
 	 */
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	/**
 	 * @return the type
 	 */
 	public String getType() {
 		return type;
 	}
+
 	/**
 	 * @param type the type to set
 	 */
 	public void setType(String type) {
 		this.type = type;
 	}
+
 	/**
 	 * @return the city
 	 */
 	public String getCity() {
 		return city;
 	}
+
 	/**
 	 * @param city the city to set
 	 */
 	public void setCity(String city) {
 		this.city = city;
 	}
+
 	/**
 	 * @return the state
 	 */
 	public String getState() {
 		return state;
 	}
+
 	/**
 	 * @param state the state to set
 	 */
 	public void setState(String state) {
 		this.state = state;
 	}
+
 	/**
 	 * @return the zip
 	 */
 	public String getZip() {
 		return zip;
 	}
+
 	/**
 	 * @param zip the zip to set
 	 */
 	public void setZip(String zip) {
 		this.zip = zip;
 	}
+
 	/**
 	 * @return the country
 	 */
 	public String getCountry() {
 		return country;
 	}
+
 	/**
 	 * @param country the country to set
 	 */
 	public void setCountry(String country) {
 		this.country = country;
 	}
+
 	/**
 	 * @return the userId
 	 */
 	public int getUserId() {
 		return userId;
 	}
+
 	/**
 	 * @param userId the userId to set
 	 */
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -139,6 +160,7 @@ public class Address {
 		result = prime * result + ((zip == null) ? 0 : zip.hashCode());
 		return result;
 	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
@@ -182,6 +204,7 @@ public class Address {
 			return false;
 		return true;
 	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
