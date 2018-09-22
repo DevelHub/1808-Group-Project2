@@ -5,11 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.hibernate.validator.constraints.UniqueElements;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -31,8 +28,7 @@ public class Credentials {
 	@Column(name = "user_role")
 	private String role;
 	
-	@OneToOne
-	@JoinColumn(name = "user_id")
+	@OneToOne(mappedBy = "credentials")
 	private Customer customer;
 
 	public Credentials() {
@@ -40,7 +36,7 @@ public class Credentials {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Credentials(int id, @UniqueElements String username, String password, String role, Customer customer) {
+	public Credentials(int id, String username, String password, String role, Customer customer) {
 		super();
 		this.id = id;
 		this.username = username;

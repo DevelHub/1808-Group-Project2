@@ -8,11 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.revature.credential.Credentials;
 
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @Entity
@@ -36,6 +37,10 @@ public class Customer {
 	private String lastname;
 	private String username;
 	private String password;
+	
+	@OneToOne
+	@JoinColumn(name = "user_id", insertable = false, updatable = false)
+	private Credentials credentials;
 	
 	@OneToMany(mappedBy = "userId")
 	private List<Address> address;
