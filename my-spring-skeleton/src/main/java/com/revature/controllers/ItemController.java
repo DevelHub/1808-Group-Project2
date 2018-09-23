@@ -46,36 +46,47 @@ public class ItemController {
 	
 
 	//find a specific item by ID.
-	@GetMapping("{itemId}")
-	public List<Item> findByItemId(@PathVariable int itemId){
-		return is.findByItemId(itemId);
+	@GetMapping("{id}")
+	public Item findByItemId(@PathVariable int id){
+		return is.findById(id);
 	}
 	
-	//update the status of an item by obtaining the company id and name of the item
+	//update the name of an item by obtaining the item id
+	//inc : item name change
+	@PatchMapping("update-name")
+	public ResponseEntity<Item> updateName(@RequestBody Item item){
+		Item inc = is.findById(item.getId());
+		inc.setName(item.getName());
+		is.save(inc);
+		ResponseEntity<Item> response = new ResponseEntity<Item>(inc, HttpStatus.CREATED);
+		return response;
+	}
+	
+	//update the status of an item by obtaining the item id
 	//isc : item status change
-	@PatchMapping("updatestatus")
-	public ResponseEntity<Item> update(@RequestBody Item aItem){
-		Item isc = is.findByIdAndName(aItem.getId(), aItem.getName());
-		isc.setStatus(aItem.getStatus());
+	@PatchMapping("update-status")
+	public ResponseEntity<Item> updateStatus(@RequestBody Item item){
+		Item isc = is.findById(item.getId());
+		isc.setStatus(item.getStatus());
 		is.save(isc);
 		ResponseEntity<Item> response = new ResponseEntity<Item>(isc, HttpStatus.CREATED);
 		return response;
 	}
 	
-	//update the price of an item by obtaining the company id and name of the item .
+	//update the price of an item by obtaining the item id
 	//ipc : item price change
-	@PatchMapping("updateprice")
+	@PatchMapping("update-price")
 	public ResponseEntity<Item> updatePrice(@RequestBody Item item){
-		Item ipc = is.findByIdAndName(item.getId(), item.getName());
+		Item ipc = is.findById(item.getId());
 		ipc.setPrice(item.getPrice());
 		is.save(ipc);
 		ResponseEntity<Item> response = new ResponseEntity<Item>(ipc, HttpStatus.CREATED);
 		return response;
 	}
 	
-	@PatchMapping("updatedescription")
+	@PatchMapping("update-description")
 	public ResponseEntity<Item> updateDescription(@RequestBody Item item){
-		Item idc = is.findByIdAndName(item.getId(), item.getName());
+		Item idc = is.findById(item.getId());
 		idc.setDescription(item.getDescription());
 		is.save(idc);
 		ResponseEntity<Item> response = new ResponseEntity<Item>(idc, HttpStatus.CREATED);

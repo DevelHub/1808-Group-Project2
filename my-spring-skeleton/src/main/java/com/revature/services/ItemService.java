@@ -23,8 +23,8 @@ public class ItemService {
 		return ir.findAll();
 	}
 	
-	public List<Item> findByItemId(int itemId){
-		return ir.findById(itemId);
+	public Item findById(int id){
+		return ir.findById(id);
 	}
 	
 	public Item findByCompanyIdAndName(int company_Id, String name){
