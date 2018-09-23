@@ -5,9 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.revature.credential.Credentials;
 
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @Entity
@@ -18,13 +21,22 @@ public class Company {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "company_id")
 	private int id;
+	@Column(name = "user_id")
 	private int userId;
+	@Column(name = "contact_id")
 	private int contactId;
+	@Column(name = "company_name")
 	private String companyName;
+	
+	@OneToOne
+	@JoinColumn(name = "user_id", insertable = false, updatable = false)
+	private Credentials credentials;
+
 	public Company() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	public Company(int id, int userId, int contactId, String companyName) {
 		super();
 		this.id = id;
@@ -32,30 +44,66 @@ public class Company {
 		this.contactId = contactId;
 		this.companyName = companyName;
 	}
+
+	/**
+	 * @return the id
+	 */
 	public int getId() {
 		return id;
 	}
+
+	/**
+	 * @param id the id to set
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	/**
+	 * @return the userId
+	 */
 	public int getUserId() {
 		return userId;
 	}
+
+	/**
+	 * @param userId the userId to set
+	 */
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+
+	/**
+	 * @return the contactId
+	 */
 	public int getContactId() {
 		return contactId;
 	}
+
+	/**
+	 * @param contactId the contactId to set
+	 */
 	public void setContactId(int contactId) {
 		this.contactId = contactId;
 	}
+
+	/**
+	 * @return the companyName
+	 */
 	public String getCompanyName() {
 		return companyName;
 	}
+
+	/**
+	 * @param companyName the companyName to set
+	 */
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -66,6 +114,10 @@ public class Company {
 		result = prime * result + userId;
 		return result;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -88,10 +140,13 @@ public class Company {
 			return false;
 		return true;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Company [id=" + id + ", userId=" + userId + ", contactId=" + contactId + ", companyName=" + companyName
 				+ "]";
 	}
-	
 }

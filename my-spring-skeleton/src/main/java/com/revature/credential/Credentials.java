@@ -8,9 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.revature.model.Company;
 import com.revature.model.Customer;
 
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
@@ -30,19 +32,23 @@ public class Credentials {
 	
 	@OneToOne(mappedBy = "credentials")
 	private Customer customer;
+	
+	@OneToOne(mappedBy = "credentials")
+	private Company company;
 
 	public Credentials() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Credentials(int id, String username, String password, String role, Customer customer) {
+	public Credentials(int id, String username, String password, String role, Customer customer, Company company) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.role = role;
 		this.customer = customer;
+		this.company = company;
 	}
 
 	/**
@@ -115,6 +121,20 @@ public class Credentials {
 		this.customer = customer;
 	}
 
+	/**
+	 * @return the company
+	 */
+	public Company getCompany() {
+		return company;
+	}
+
+	/**
+	 * @param company the company to set
+	 */
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -122,6 +142,7 @@ public class Credentials {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((company == null) ? 0 : company.hashCode());
 		result = prime * result + ((customer == null) ? 0 : customer.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
@@ -142,6 +163,11 @@ public class Credentials {
 		if (getClass() != obj.getClass())
 			return false;
 		Credentials other = (Credentials) obj;
+		if (company == null) {
+			if (other.company != null)
+				return false;
+		} else if (!company.equals(other.company))
+			return false;
 		if (customer == null) {
 			if (other.customer != null)
 				return false;
@@ -173,6 +199,6 @@ public class Credentials {
 	@Override
 	public String toString() {
 		return "Credentials [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role
-				+ ", customer=" + customer + "]";
+				+ ", customer=" + customer + ", company=" + company + "]";
 	}
 }
