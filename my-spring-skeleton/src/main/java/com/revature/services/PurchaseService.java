@@ -20,6 +20,7 @@ public class PurchaseService {
 		purchase.setDeliveryDate(p.getDeliveryDate());
 		purchase.setPurchaseDate(p.getPurchaseDate());
 		purchase.setItemId(p.getItemId());
+		purchase.setQuantity(p.getQuantity());
 		return pr.save(purchase).getId();
 	}
 	

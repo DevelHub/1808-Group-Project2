@@ -34,6 +34,7 @@ public class Purchase {
 	@Column(name = "delivery_date")
     @DateTimeFormat(pattern = "dd.MM HH:MM")
 	private Timestamp deliveryDate;
+	private int quantity;
 	
 	@ManyToOne
     @JoinColumn(name = "item_id", insertable = false, updatable = false)
@@ -44,13 +45,15 @@ public class Purchase {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Purchase(int id, int itemId, int customerId, Timestamp purchaseDate, Timestamp deliveryDate, Item item) {
+	public Purchase(int id, int itemId, int customerId, Timestamp purchaseDate, Timestamp deliveryDate, int quantity,
+			Item item) {
 		super();
 		this.id = id;
 		this.itemId = itemId;
 		this.customerId = customerId;
 		this.purchaseDate = purchaseDate;
 		this.deliveryDate = deliveryDate;
+		this.quantity = quantity;
 		this.item = item;
 	}
 
@@ -125,6 +128,20 @@ public class Purchase {
 	}
 
 	/**
+	 * @return the quantity
+	 */
+	public int getQuantity() {
+		return quantity;
+	}
+
+	/**
+	 * @param quantity the quantity to set
+	 */
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	/**
 	 * @return the item
 	 */
 	public Item getItem() {
@@ -151,6 +168,7 @@ public class Purchase {
 		result = prime * result + ((item == null) ? 0 : item.hashCode());
 		result = prime * result + itemId;
 		result = prime * result + ((purchaseDate == null) ? 0 : purchaseDate.hashCode());
+		result = prime * result + quantity;
 		return result;
 	}
 
@@ -187,6 +205,8 @@ public class Purchase {
 				return false;
 		} else if (!purchaseDate.equals(other.purchaseDate))
 			return false;
+		if (quantity != other.quantity)
+			return false;
 		return true;
 	}
 
@@ -196,6 +216,6 @@ public class Purchase {
 	@Override
 	public String toString() {
 		return "Purchase [id=" + id + ", itemId=" + itemId + ", customerId=" + customerId + ", purchaseDate="
-				+ purchaseDate + ", deliveryDate=" + deliveryDate + ", item=" + item + "]";
+				+ purchaseDate + ", deliveryDate=" + deliveryDate + ", quantity=" + quantity + ", item=" + item + "]";
 	}
 }
