@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.model.Company;
 import com.revature.model.Item;
+import com.revature.services.CompanyService;
 import com.revature.services.ItemService;
 
 @CrossOrigin
@@ -24,6 +26,9 @@ public class ItemController {
 	
 	@Autowired
 	ItemService is;
+	
+	@Autowired
+	CompanyService cs;
 	
 	//allow for the company to add an item.
 	@PostMapping("add")
@@ -81,18 +86,19 @@ public class ItemController {
 	public List<Map<String, Object>> findTotalItemsOfCompany() {
 		System.out.println("Getting Number of Items by Company");
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-		try {
-			int index = 1;
-			while(true) {
+		List<Company> companies = cs.findAll();
+		int numberOfCompanies = companies.size();
+		for (int i = 0; i < numberOfCompanies; i++) {
+			try {
 				Map<String, Object> map = new HashMap<String, Object>();
-				List<Item> items = is.findByCompanyId(index++);
+				List<Item> items = is.findByCompanyId(i);
 				String companyName = items.get(0).getCompany().getCompanyName();
 				map.put("name", companyName);
 				map.put("total", items.size());
 				list.add(map);
+			} catch(IndexOutOfBoundsException ex) {
+				System.out.println("No Items");
 			}
-		} catch(IndexOutOfBoundsException ex) {
-			System.out.println("Exception Caught");
 		}
 		return list;
 	}
