@@ -41,7 +41,7 @@ public class SubscriptionController {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		List<Company> companies = cs.findAll();
 		int numberOfCompanies = companies.size();
-		for (int i = 0; i < numberOfCompanies; i++) {
+		for (int i = 1; i <= numberOfCompanies; i++) {
 			try {
 				Map<String, Object> map = new HashMap<String, Object>();
 				List<Subscription> subs = ss.findByCompanyId(i);
