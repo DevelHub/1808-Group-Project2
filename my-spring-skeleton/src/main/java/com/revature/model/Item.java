@@ -37,6 +37,7 @@ public class Item {
     @Column(name = "post_date")
     private Timestamp postDate;
     private String status;
+    private String image;
     
     @ManyToOne
     @JoinColumn(name = "company_id", insertable = false, updatable= false)
@@ -48,7 +49,7 @@ public class Item {
 	}
 
 	public Item(int id, int companyId, int typeId, String gender, String name, String description, int price,
-			Timestamp postDate, String status, Company company) {
+			Timestamp postDate, String status, String image, Company company) {
 		super();
 		this.id = id;
 		this.companyId = companyId;
@@ -59,6 +60,7 @@ public class Item {
 		this.price = price;
 		this.postDate = postDate;
 		this.status = status;
+		this.image = image;
 		this.company = company;
 	}
 
@@ -189,6 +191,20 @@ public class Item {
 	}
 
 	/**
+	 * @return the image
+	 */
+	public String getImage() {
+		return image;
+	}
+
+	/**
+	 * @param image the image to set
+	 */
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	/**
 	 * @return the company
 	 */
 	public Company getCompany() {
@@ -214,6 +230,7 @@ public class Item {
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
 		result = prime * result + id;
+		result = prime * result + ((image == null) ? 0 : image.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((postDate == null) ? 0 : postDate.hashCode());
 		result = prime * result + price;
@@ -253,6 +270,11 @@ public class Item {
 			return false;
 		if (id != other.id)
 			return false;
+		if (image == null) {
+			if (other.image != null)
+				return false;
+		} else if (!image.equals(other.image))
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -282,6 +304,6 @@ public class Item {
 	public String toString() {
 		return "Item [id=" + id + ", companyId=" + companyId + ", typeId=" + typeId + ", gender=" + gender + ", name="
 				+ name + ", description=" + description + ", price=" + price + ", postDate=" + postDate + ", status="
-				+ status + ", company=" + company + "]";
+				+ status + ", image=" + image + ", company=" + company + "]";
 	}
 }
