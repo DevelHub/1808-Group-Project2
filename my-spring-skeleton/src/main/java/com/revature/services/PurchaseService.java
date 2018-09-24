@@ -36,24 +36,52 @@ public class PurchaseService {
 		return pr.findByCustomerId(customerId);
 	}
 	
-//	public List<Item> buildRecomendation(int customerId) {
-//		List<Purchase> listOfPurchases = pr.findByCustomerId(customerId);
-//		List<List<Item>> recomendedItems = new ArrayList<List<Item>>();
-//		listOfPurchases.get(0).getItemId();
-//		if(listOfPurchases.isEmpty()) {
-//			return null;
-//		}
-//		else {
-//			for (int i = 0; i < listOfPurchases.size(); i++) {
-//				String itemName = listOfPurchases.get(i).getItem().getName();
-//				String[] splitItemName = itemName.split(itemName);
-//				Random ran = new Random();
-//				int randomIndex = ran.nextInt(splitItemName.length);
-//				List<Item> items = ir.findAll();
-//				recomendedItems.add(items.stream()
-//						.filter(itemIndex -> itemIndex.getName().contains(splitItemName[randomIndex]))
-//						.collect(Collectors.toList()));
-//			}
-//		}
-//	}
+	public List<List<Item>> buildRecomendation(int customerId) {
+		List<Purchase> listOfPurchases = pr.findByCustomerId(customerId);
+		List<List<Item>> recommendedItems = new ArrayList<List<Item>>();
+		if(listOfPurchases.isEmpty()) {
+			return null;
+		}
+		else {
+			Random ran = new Random();
+			List<Item> items = ir.findAll();
+			int count = items.size() / listOfPurchases.size();
+			int index = 0;
+			while(true) {
+				try {
+					List<Item> nextItems = new ArrayList<Item>();
+					for(int i = index; i < index + count; i++) {
+						nextItems.add(items.get(i));
+					}
+					int sub = ran.nextInt(listOfPurchases.size());
+					String itemDescription = listOfPurchases.get(sub).getItem().getDescription();
+					String itemGender = listOfPurchases.get(sub).getItem().getGender();
+					double itemPrice = listOfPurchases.get(sub).getItem().getPrice();
+					String[] splitItemDescription = itemDescription.split(" ");
+					int randomIndex = ran.nextInt(splitItemDescription.length);
+					List<Item> temp = nextItems.stream()
+							.filter(itemIndex -> 
+								(itemIndex.getDescription().contains(splitItemDescription[randomIndex]))
+								&& (itemIndex.getGender().equalsIgnoreCase(itemGender))
+								&& (isClose(itemIndex.getPrice(), itemPrice)))
+							.collect(Collectors.toList());
+					if(!temp.isEmpty())
+						recommendedItems.add(temp);
+					index += count;
+				} catch (IndexOutOfBoundsException ex) {
+					System.out.println("Index Out of Bounds!");
+					break;
+				}
+			}
+		}
+		return recommendedItems;
+	}
+	
+	public boolean isClose(double itemIndex, double itemPrice) {
+		double offSet = 10.0;
+		if(itemIndex >= (itemPrice - offSet) || (itemIndex > itemPrice && itemIndex <= (itemPrice + offSet))) {
+			return true;
+		}
+		return false;
+	}
 }

@@ -83,7 +83,9 @@ public class ItemController {
 		ResponseEntity<Item> response = new ResponseEntity<Item>(ipc, HttpStatus.CREATED);
 		return response;
 	}
-	
+
+	//update the description of an item by obtaining the item id
+	//idc : item description change
 	@PatchMapping("update-description")
 	public ResponseEntity<Item> updateDescription(@RequestBody Item item){
 		Item idc = is.findById(item.getId());

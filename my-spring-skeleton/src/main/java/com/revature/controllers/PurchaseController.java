@@ -34,11 +34,10 @@ public class PurchaseController {
 		System.out.println("Getting Purchases");
 		return ps.findByCustomerId(customerId);
 	}
-	
-//	@GetMapping("recomendation/{customerId}")
-//	public List<Item> buildRecomendation(@PathVariable int customerId) {
-//		System.out.println("Building Recomendations");
-//		return ps.buildRecomendation(customerId);
-//	}
-	
+
+	@GetMapping("recomendation/{customerId}")
+	public List<List<Item>> buildRecomendation(@PathVariable int customerId) {
+		System.out.println("Building Recomendations");
+		return ps.buildRecomendation(customerId);
+	}
 }
