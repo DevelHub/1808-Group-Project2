@@ -46,7 +46,6 @@ public class CustomerService {
 			int addressId = ac.save(address);
 			customerAddress.setCustomerId(customerId);
 			customerAddress.setAddressId(addressId);
-			System.out.println("CUSTOMER ID: " + customerId + "ADDRESS ID: " + addressId);
 			cas.save(customerId, addressId);
 		}
 		return customerId;
