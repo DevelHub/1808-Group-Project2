@@ -74,8 +74,9 @@ public class CredentialService {
 		return cs.save(customer);
 	}
 	
+	// find by username and password
 	public List<Credentials> findByUsernameAndPassword(String username, String password) {
-        // Salt value stored in database 
+        // Salt value stored in database
         String salt = username;
         String hashedPassword = generateSecurePassword(password, salt);
 		return cr.findByUsernameAndPassword(username, hashedPassword);
