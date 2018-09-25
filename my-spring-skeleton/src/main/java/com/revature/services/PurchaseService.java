@@ -80,7 +80,7 @@ public class PurchaseService {
 	}
 	
 	public boolean isClose(double itemIndex, double itemPrice) {
-		double offSet = 10.0;
+		double offSet = 70.0;
 		if(itemIndex >= (itemPrice - offSet) || (itemIndex > itemPrice && itemIndex <= (itemPrice + offSet))) {
 			return true;
 		}
