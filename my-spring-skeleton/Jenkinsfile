@@ -27,9 +27,11 @@ pipeline {
 
     stage('MVN Build') {
       steps {
-        dir ('project2-DevelHub') {
-        	// Run the maven build
-        	sh "mvn -Dmaven.test.failure.ignore clean package"
+        dir ('my-spring-skeleton') {
+            // dir ('') {
+            	// Run the maven build
+            	sh "mvn -Dmaven.test.failure.ignore clean package"
+            // }
 	}
       }
     }
